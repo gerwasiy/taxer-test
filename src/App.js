@@ -1,23 +1,41 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useState} from "react";
 
+import DragDrop from "./drag&drop";
+import Info from "./info";
 function App() {
+ 
+  
+
+  const [btn,setBtn] = useState(false);
+
+  let OnClickHandler = function(e){
+      e.preventDefault();
+      setBtn(false);
+  }
+  let OffClickHandler = function(e){
+      e.preventDefault();
+      setBtn(true);
+     
+  }
+ 
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <main>
+        <section>
+          <div className="subject-box">
+          <h1>Власник</h1>
+            <div className="subjects"> </div>
+            
+            <div>
+            {
+                btn ? <button onClick={(e) => OnClickHandler(e)} className="cancel">Скасувати</button> : <button  onClick={(e) => OffClickHandler(e)} className="add">Додати</button>
+            }
+        </div>
+          </div>
+     {btn ? <DragDrop/> : <Info />}
+
+        </section>
+      </main>
     </div>
   );
 }
